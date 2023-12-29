@@ -25,7 +25,7 @@ This project is a java 21 project with 3 libraries:
 * junit jupiter
 * assertj
 * maven-surefire-plugin
-* 
+
 ## Constraints to execute this kata
 
 Principle of a kata is to be repeated to increase our skills in development, but just repeat the same exercise without objective can be lazy, so I propose you to have little objectives each time you repeat this kata. These objectives are so generic, so they can be operated for others kata.
