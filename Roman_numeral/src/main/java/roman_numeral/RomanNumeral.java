@@ -5,11 +5,10 @@ public class RomanNumeral {
     public static final RomanNumeralSymbol ONE_NUMBER_MINIMUM = RomanNumeralSymbol.ONENUMBERMINIMUM;
     public static final RomanNumeralSymbol ONE_NUMBER_MEDIUM = RomanNumeralSymbol.ONENUMBERMEDIUM;
     public static final RomanNumeralSymbol ONE_NUMBER_MAXIMUM = RomanNumeralSymbol.ONENUMBERMAXIMUM;
-
-    public static String unitsRomanNumeral = "";
     public static final RomanNumeralSymbol TWO_NUMBER_MEDIUM = RomanNumeralSymbol.TWONUMBERMEDIUM;
     public static final RomanNumeralSymbol TWO_NUMBER_MAXIMUM = RomanNumeralSymbol.TWONUMBERMAXIMUM;
-    public static String decadesRomanNumeral = "";
+    public static final RomanNumeralSymbol THREE_NUMBER_MEDIUM = RomanNumeralSymbol.THREENUMBERMEDIUM;
+    public static final RomanNumeralSymbol THREE_NUMBER_MAXIMUM = RomanNumeralSymbol.THREENUMBERMAXIMUM;
     public static String convertArabicToRoman(int arabicNumeral) {
         /*
         On raisonne avec
@@ -29,10 +28,19 @@ public class RomanNumeral {
         sinon if nbr = max - md
         alors nbr = "md+max"
         */
-        if (getDecadesRomanNumeral(arabicNumeral).isEmpty()) {
-            return getUnitsRomanNumeral(arabicNumeral);
+
+        if (getHundredRomanNumeral(arabicNumeral).isEmpty()){
+            if (getDecadesRomanNumeral(arabicNumeral).isEmpty()) {
+                return getUnitsRomanNumeral(arabicNumeral);
+            }
+            return getDecadesRomanNumeral(arabicNumeral) + getUnitsRomanNumeral(arabicNumeral);
+        }  else {
+            return getHundredRomanNumeral(arabicNumeral) + getDecadesRomanNumeral(arabicNumeral) + getUnitsRomanNumeral(arabicNumeral);
         }
-        return getDecadesRomanNumeral(arabicNumeral) + getUnitsRomanNumeral(arabicNumeral);
+    }
+    public static String getHundredRomanNumeral(int arabicNumeral) {
+        int hundredArabicNumeral = getHundred(arabicNumeral);
+        return getPowerTenToConvert(hundredArabicNumeral, TWO_NUMBER_MAXIMUM, THREE_NUMBER_MEDIUM, THREE_NUMBER_MAXIMUM);
     }
 
     public static String getDecadesRomanNumeral(int arabicNumeral) {
@@ -73,5 +81,9 @@ public class RomanNumeral {
 
     public static int getDecades(int arabicNumber) {
         return arabicNumber % 100 - getUnits(arabicNumber);
+    }
+
+    public static int getHundred(int arabicNumber) {
+        return arabicNumber % 1000 - getDecades(arabicNumber) - getUnits(arabicNumber);
     }
 }

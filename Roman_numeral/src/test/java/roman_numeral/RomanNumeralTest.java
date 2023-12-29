@@ -57,4 +57,14 @@ class RomanNumeralTest {
     public void shouldConvertNintyNineToXCIXString() {
         assert(RomanNumeral.convertArabicToRoman(99)).equals("XCIX");
     }
+
+    @Test
+    public void shouldConvertTwoHundredFourtyFiveToCCXLVString() {
+        assert(RomanNumeral.convertArabicToRoman(245)).equals("CCXLV");
+    }
+
+    @Test
+    public void shouldConvertTwoHundredToCCString() {
+        assert(RomanNumeral.convertArabicToRoman(200)).equals("CC");
+    }
 }
