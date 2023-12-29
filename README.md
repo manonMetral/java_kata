@@ -27,7 +27,7 @@ Third constraint should be to minimize the time to code :
 
 Fourth constraints should be to do it in another language after well understanding.
 
-## Advance
+## Advice
 
 Doing a kata is more interesting when you do it by pair programming. 
 
