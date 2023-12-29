@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 class RomanNumeralTest {
     @Test
     public void shouldConvertZeroToEmptyString() {
-        assert(RomanNumeral.convertArabicToRoman(0)).isEmpty();
+        assert (RomanNumeral.convertArabicToRoman(0)).isEmpty();
     }
 
     @Test
@@ -36,5 +36,25 @@ class RomanNumeralTest {
     @Test
     public void shouldConvertNineToIXString() {
         assert(RomanNumeral.convertArabicToRoman(9)).equals("IX");
+    }
+
+    @Test
+    public void shouldConvertTenToXString() {
+        assert(RomanNumeral.convertArabicToRoman(10)).equals("X");
+    }
+
+    @Test
+    public void shouldConvertThirtySixToXXXVIString() {
+        assert(RomanNumeral.convertArabicToRoman(36)).equals("XXXVI");
+    }
+
+    @Test
+    public void shouldConvertFourtyNineToXLIXString() {
+        assert(RomanNumeral.convertArabicToRoman(49)).equals("XLIX");
+    }
+
+    @Test
+    public void shouldConvertNintyNineToXCIXString() {
+        assert(RomanNumeral.convertArabicToRoman(99)).equals("XCIX");
     }
 }
