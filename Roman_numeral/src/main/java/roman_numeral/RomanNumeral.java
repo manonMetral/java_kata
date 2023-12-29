@@ -2,17 +2,13 @@ package roman_numeral;
 
 public class RomanNumeral {
 
-    public static final int ONE_NUMBER_MINIMUM_VALUE = RomanNumeralSymbol.ONENUMBERMINIMUM.getValue();
-    public static final int ONE_NUMBER_MEDIUM_VALUE = RomanNumeralSymbol.ONENUMBERMEDIUM.getValue();
-    public static final int ONE_NUMBER_MAXIMUM_VALUE = RomanNumeralSymbol.ONENUMBERMAXIMUM.getValue();
-    public static final String ONE_NUMBER_MINIMUM_SYMBOL = RomanNumeralSymbol.ONENUMBERMINIMUM.getRomanNumeralSymbol();
-    public static final String ONE_NUMBER_MEDIUM_SYMBOL = RomanNumeralSymbol.ONENUMBERMEDIUM.getRomanNumeralSymbol();
-    public static final String ONE_NUMBER_MAXIMUM_SYMBOL = RomanNumeralSymbol.ONENUMBERMAXIMUM.getRomanNumeralSymbol();
+    public static final RomanNumeralSymbol ONE_NUMBER_MINIMUM = RomanNumeralSymbol.ONENUMBERMINIMUM;
+    public static final RomanNumeralSymbol ONE_NUMBER_MEDIUM = RomanNumeralSymbol.ONENUMBERMEDIUM;
+    public static final RomanNumeralSymbol ONE_NUMBER_MAXIMUM = RomanNumeralSymbol.ONENUMBERMAXIMUM;
+
     public static String unitsRomanNumeral = "";
-    public static final int TWO_NUMBER_MEDIUM_VALUE = RomanNumeralSymbol.TWONUMBERMEDIUM.getValue();
-    public static final int TWO_NUMBER_MAXIMUM_VALUE = RomanNumeralSymbol.TWONUMBERMAXIMUM.getValue();
-    public static final String TWO_NUMBER_MEDIUM_SYMBOL = RomanNumeralSymbol.TWONUMBERMEDIUM.getRomanNumeralSymbol();
-    public static final String TWO_NUMBER_MAXIMUM_SYMBOL = RomanNumeralSymbol.TWONUMBERMAXIMUM.getRomanNumeralSymbol();
+    public static final RomanNumeralSymbol TWO_NUMBER_MEDIUM = RomanNumeralSymbol.TWONUMBERMEDIUM;
+    public static final RomanNumeralSymbol TWO_NUMBER_MAXIMUM = RomanNumeralSymbol.TWONUMBERMAXIMUM;
     public static String decadesRomanNumeral = "";
     public static String convertArabicToRoman(int arabicNumeral) {
         /*
@@ -41,42 +37,34 @@ public class RomanNumeral {
 
     public static String getDecadesRomanNumeral(int arabicNumeral) {
         int decadesArabicNumeral = getDecades(arabicNumeral);
-        if (arabicNumeral < ONE_NUMBER_MAXIMUM_VALUE) {
-            decadesRomanNumeral = "";
-        } else if (ONE_NUMBER_MAXIMUM_VALUE <= decadesArabicNumeral && decadesArabicNumeral < TWO_NUMBER_MEDIUM_VALUE) {
-            if (decadesArabicNumeral != TWO_NUMBER_MEDIUM_VALUE - ONE_NUMBER_MAXIMUM_VALUE) {
-                decadesRomanNumeral = ONE_NUMBER_MAXIMUM_SYMBOL.repeat(decadesArabicNumeral/10);
-            } else {
-                decadesRomanNumeral = ONE_NUMBER_MAXIMUM_SYMBOL + TWO_NUMBER_MEDIUM_SYMBOL;
-            }
-        } else if (TWO_NUMBER_MEDIUM_VALUE <= decadesArabicNumeral && decadesArabicNumeral < TWO_NUMBER_MAXIMUM_VALUE) {
-            if (decadesArabicNumeral != TWO_NUMBER_MAXIMUM_VALUE - ONE_NUMBER_MAXIMUM_VALUE) {
-                decadesRomanNumeral =  TWO_NUMBER_MEDIUM_SYMBOL + ONE_NUMBER_MAXIMUM_SYMBOL.repeat((decadesArabicNumeral-TWO_NUMBER_MEDIUM_VALUE)/10);
-            } else {
-                decadesRomanNumeral = ONE_NUMBER_MAXIMUM_SYMBOL + TWO_NUMBER_MAXIMUM_SYMBOL;
-            }
-        }
-        return decadesRomanNumeral;
+        return getPowerTenToConvert(decadesArabicNumeral, ONE_NUMBER_MAXIMUM, TWO_NUMBER_MEDIUM, TWO_NUMBER_MAXIMUM);
     }
 
     public static String getUnitsRomanNumeral(int arabicNumeral) {
         int unitsArabicNumeral = getUnits(arabicNumeral);
-        if (ONE_NUMBER_MINIMUM_VALUE <= unitsArabicNumeral && unitsArabicNumeral < ONE_NUMBER_MEDIUM_VALUE) {
-            if (unitsArabicNumeral != ONE_NUMBER_MEDIUM_VALUE - ONE_NUMBER_MINIMUM_VALUE) {
-                unitsRomanNumeral = ONE_NUMBER_MINIMUM_SYMBOL.repeat(unitsArabicNumeral);
+        return getPowerTenToConvert(unitsArabicNumeral, ONE_NUMBER_MINIMUM, ONE_NUMBER_MEDIUM, ONE_NUMBER_MAXIMUM);
+    }
+
+    public static String getPowerTenToConvert(int powerTenArabicNumeral, RomanNumeralSymbol minimum, RomanNumeralSymbol medium, RomanNumeralSymbol maximum) {
+        String powerTenToConvert;
+        if (powerTenArabicNumeral < minimum.getValue()) {
+            powerTenToConvert = "";
+        } else if (powerTenArabicNumeral < medium.getValue()) {
+            if (powerTenArabicNumeral != medium.getValue() - minimum.getValue()) {
+                powerTenToConvert = minimum.getRomanNumeralSymbol().repeat(powerTenArabicNumeral/minimum.getValue());
             } else {
-                unitsRomanNumeral = ONE_NUMBER_MINIMUM_SYMBOL + ONE_NUMBER_MEDIUM_SYMBOL;
+                powerTenToConvert = minimum.getRomanNumeralSymbol() + medium.getRomanNumeralSymbol();
             }
-        } else if (ONE_NUMBER_MEDIUM_VALUE <= unitsArabicNumeral && unitsArabicNumeral < ONE_NUMBER_MAXIMUM_VALUE) {
-            if (unitsArabicNumeral != ONE_NUMBER_MAXIMUM_VALUE - ONE_NUMBER_MINIMUM_VALUE) {
-                unitsRomanNumeral =  ONE_NUMBER_MEDIUM_SYMBOL + ONE_NUMBER_MINIMUM_SYMBOL.repeat(unitsArabicNumeral-ONE_NUMBER_MEDIUM_VALUE);
+        } else if (powerTenArabicNumeral < maximum.getValue()) {
+            if (powerTenArabicNumeral != maximum.getValue() - minimum.getValue()) {
+                powerTenToConvert =  medium.getRomanNumeralSymbol() + minimum.getRomanNumeralSymbol().repeat(powerTenArabicNumeral-medium.getValue());
             } else {
-                unitsRomanNumeral = ONE_NUMBER_MINIMUM_SYMBOL + ONE_NUMBER_MAXIMUM_SYMBOL;
+                powerTenToConvert = minimum.getRomanNumeralSymbol() + maximum.getRomanNumeralSymbol();
             }
         } else {
-            unitsRomanNumeral = "";
+            powerTenToConvert = "";
         }
-        return unitsRomanNumeral;
+        return powerTenToConvert;
     }
 
     public static int getUnits(int arabicNumber) {
