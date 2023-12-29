@@ -1,3 +1,0 @@
-package leapyear;
-
-class LeapYearTest {}
