@@ -67,4 +67,10 @@ class RomanNumeralTest {
     public void shouldConvertTwoHundredToCCString() {
         assert(RomanNumeral.convertArabicToRoman(200)).equals("CC");
     }
+
+    @Test
+    public void shouldConvertThousandFiveHundredFiftyFiveToMDLVString() {
+        System.out.println(RomanNumeral.convertArabicToRoman(1555));
+        assert(RomanNumeral.convertArabicToRoman(1555)).equals("MDLV");
+    }
 }

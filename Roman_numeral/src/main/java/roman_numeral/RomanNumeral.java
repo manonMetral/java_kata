@@ -29,14 +29,21 @@ public class RomanNumeral {
         alors nbr = "md+max"
         */
 
-        if (getHundredRomanNumeral(arabicNumeral).isEmpty()){
-            if (getDecadesRomanNumeral(arabicNumeral).isEmpty()) {
-                return getUnitsRomanNumeral(arabicNumeral);
+        if(getThousandRomanNumeral(arabicNumeral).isEmpty()){
+            if (getHundredRomanNumeral(arabicNumeral).isEmpty()) {
+                if (getDecadesRomanNumeral(arabicNumeral).isEmpty()) {
+                    return getUnitsRomanNumeral(arabicNumeral);
+                }
+                return getDecadesRomanNumeral(arabicNumeral) + getUnitsRomanNumeral(arabicNumeral);
             }
-            return getDecadesRomanNumeral(arabicNumeral) + getUnitsRomanNumeral(arabicNumeral);
-        }  else {
             return getHundredRomanNumeral(arabicNumeral) + getDecadesRomanNumeral(arabicNumeral) + getUnitsRomanNumeral(arabicNumeral);
+        }  else {
+            return getThousandRomanNumeral(arabicNumeral) + getHundredRomanNumeral(arabicNumeral) + getDecadesRomanNumeral(arabicNumeral) + getUnitsRomanNumeral(arabicNumeral);
         }
+    }
+    public static String getThousandRomanNumeral(int arabicNumeral) {
+        int thousandArabicNumeral = (arabicNumeral-getHundred(arabicNumeral)-getDecades(arabicNumeral)-getUnits(arabicNumeral))/1000;
+        return THREE_NUMBER_MAXIMUM.getRomanNumeralSymbol().repeat(thousandArabicNumeral);
     }
     public static String getHundredRomanNumeral(int arabicNumeral) {
         int hundredArabicNumeral = getHundred(arabicNumeral);
