@@ -2,6 +2,8 @@ package roman_numeral;
 
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 class RomanNumeralTest {
     @Test
     public void shouldConvertZeroToEmptyString() {
@@ -70,7 +72,31 @@ class RomanNumeralTest {
 
     @Test
     public void shouldConvertThousandFiveHundredFiftyFiveToMDLVString() {
-        System.out.println(RomanNumeral.convertArabicToRoman(1555));
         assert(RomanNumeral.convertArabicToRoman(1555)).equals("MDLV");
+    }
+
+    @Test
+    public void shouldConvertNumeralToDigitWhenOneUnityNumber() {
+        assertThat(RomanNumeral.convertRomanToArabic("V")).isEqualTo(5);
+    }
+
+    @Test
+    public void shouldConvertNumeralToDigitWhenOneLetterRomanNumber() {
+        assertThat(RomanNumeral.convertRomanToArabic("M")).isEqualTo(1000);
+    }
+
+    @Test
+    public void shouldConvertNumeralToDigitWhenManyLettersRomanNumber() {
+        assertThat(RomanNumeral.convertRomanToArabic("MDCXXXVI")).isEqualTo(1636);
+    }
+
+    @Test
+    public void shouldConvertNumeralToDigitWhenManyLettersAndInversionLectureInRomanNumber() {
+        assertThat(RomanNumeral.convertRomanToArabic("CMXCIX")).isEqualTo(999);
+    }
+
+    @Test
+    public void shouldConvertNumeralToComplexDigit() {
+        assertThat(RomanNumeral.convertRomanToArabic("CMXIV")).isEqualTo(914);
     }
 }

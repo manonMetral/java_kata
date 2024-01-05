@@ -1,5 +1,10 @@
 package roman_numeral;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+
 public class RomanNumeral {
 
     public static final RomanNumeralSymbol ONE_NUMBER_MINIMUM = RomanNumeralSymbol.ONENUMBERMINIMUM;
@@ -92,5 +97,54 @@ public class RomanNumeral {
 
     public static int getHundred(int arabicNumber) {
         return arabicNumber % 1000 - getDecades(arabicNumber) - getUnits(arabicNumber);
+    }
+
+    public static int convertRomanToArabic(String numeralRoman) {
+        RomanNumeralSymbol[] enumValues = RomanNumeralSymbol.values();
+        List<Integer> arrayValues = new ArrayList<>();
+        arrayValues.add(calculationForComplexNumber(numeralRoman));
+
+        List<String> arrayRomanNumberToTreat = Arrays.stream(treatmentForComplexNumberOnString(numeralRoman).split("")).toList();
+        for(String numberToConvert: arrayRomanNumberToTreat){
+            for (RomanNumeralSymbol enumValue : enumValues) {
+                if (Objects.equals(enumValue.getRomanNumeralSymbol(), numberToConvert)) {
+                    arrayValues.add(enumValue.getValue());
+                }
+            }
+        }
+        return arrayValues.stream().mapToInt(Integer::intValue).sum();
+    }
+
+    public static int calculationForComplexNumber(String numeralRoman) {
+        int additionOfComplexNumbers = 0;
+        if (numeralRoman.matches(".*CM.*")){
+            additionOfComplexNumbers += 900;
+        }
+        if(numeralRoman.matches(".*XC.*")){
+            additionOfComplexNumbers += 90;
+        }
+        if(numeralRoman.matches(".*IX.*")){
+            additionOfComplexNumbers += 9;
+        }
+        if(numeralRoman.matches(".*IV.*")){
+            additionOfComplexNumbers += 4;
+        }
+        return additionOfComplexNumbers;
+    }
+
+    public static String treatmentForComplexNumberOnString(String numeralRoman) {
+        if(numeralRoman.matches(".*CM.*")){
+            numeralRoman = numeralRoman.replace("CM", "");
+        }
+        if(numeralRoman.matches(".*XC.*")){
+            numeralRoman = numeralRoman.replace("XC", "");
+        }
+        if(numeralRoman.matches(".*IX.*")){
+            numeralRoman = numeralRoman.replace("IX", "");
+        }
+        if(numeralRoman.matches(".*IV.*")){
+            numeralRoman = numeralRoman.replace("IV", "");
+        }
+        return numeralRoman;
     }
 }
