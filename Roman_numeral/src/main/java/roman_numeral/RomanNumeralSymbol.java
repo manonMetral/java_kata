@@ -5,8 +5,8 @@ public enum RomanNumeralSymbol {
     TWONUMBERMEDIUM("L", 50), TWONUMBERMAXIMUM("C", 100),
     THREENUMBERMEDIUM("D", 500), THREENUMBERMAXIMUM("M", 1000);
 
-    private String romanNumeralSymbol;
-    private int value;
+    private final String romanNumeralSymbol;
+    private final int value;
 
     RomanNumeralSymbol(String romanNumeralSymbol, int value) {
         this.romanNumeralSymbol = romanNumeralSymbol;
@@ -21,3 +21,6 @@ public enum RomanNumeralSymbol {
         return romanNumeralSymbol;
     }
 }
+
+// découpage en millier/centaine/unite
+// map

@@ -42,9 +42,9 @@ public class RomanNumeral {
                 return getDecadesRomanNumeral(arabicNumeral) + getUnitsRomanNumeral(arabicNumeral);
             }
             return getHundredRomanNumeral(arabicNumeral) + getDecadesRomanNumeral(arabicNumeral) + getUnitsRomanNumeral(arabicNumeral);
-        }  else {
-            return getThousandRomanNumeral(arabicNumeral) + getHundredRomanNumeral(arabicNumeral) + getDecadesRomanNumeral(arabicNumeral) + getUnitsRomanNumeral(arabicNumeral);
         }
+        return getThousandRomanNumeral(arabicNumeral) + getHundredRomanNumeral(arabicNumeral) + getDecadesRomanNumeral(arabicNumeral) + getUnitsRomanNumeral(arabicNumeral);
+
     }
     public static String getThousandRomanNumeral(int arabicNumeral) {
         int thousandArabicNumeral = (arabicNumeral-getHundred(arabicNumeral)-getDecades(arabicNumeral)-getUnits(arabicNumeral))/1000;
